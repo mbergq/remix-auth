@@ -1,6 +1,7 @@
-import { Form } from "@remix-run/react";
+import { Form, json } from "@remix-run/react";
 import type { ActionFunctionArgs } from "@remix-run/node";
-
+import { db } from "../../db/utils";
+import { user } from "../../db/schema";
 export default function SignUp() {
   return (
     <>
@@ -10,14 +11,14 @@ export default function SignUp() {
             Sign up
           </h2>
           <Form
-            method="post"
             action="/signup"
+            method="post"
             className="flex flex-col items-center"
           >
             <input
-              type="text"
-              placeholder="Email.."
-              name="email"
+              type="name"
+              placeholder="Name.."
+              name="name"
               className="bg-slate-600 rounded-sm py-2 px-2 text-[#FFFDF2]"
             />
             <input
@@ -45,8 +46,28 @@ export default function SignUp() {
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
-  const email = formData.get("email");
-  console.log(email);
+  // const name = formData.get("name");
+  // const password = formData.get("password");
+  const name = String(formData.get("name"));
+  const password = String(formData.get("password"));
 
+  if (!name || !password) {
+    return Response.json(
+      { error: "Required fields are missing" },
+      { status: 400 }
+    );
+  }
+
+  try {
+    const hashedPassword = await Bun.password.hash("test1", "argon2d");
+    await db.insert(user).values({ userName: name, password: hashedPassword });
+    Response.json({ message: "A new user has been added", status: 201 });
+  } catch (error) {
+    Response.json({
+      error: "server_error",
+      message: "Unable to create user",
+      status: 400,
+    });
+  }
   return Response.json({ ok: true });
 };

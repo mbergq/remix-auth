@@ -25,7 +25,11 @@
     "react-hook-form": "^7.53.1",
     "react-router-dom": "6",
     "remix-hook-form": "^5.1.1",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "drizzle-orm": "^0.34.1",
+    "pg": "^8.13.0",
+    "@types/bun": "latest",
+    "@types/pg": "^8.11.10"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.15.0",
@@ -44,7 +48,10 @@
     "tailwindcss": "^3.4.4",
     "typescript": "^5.1.6",
     "vite": "^5.4.11",
-    "vite-tsconfig-paths": "^4.2.1"
+    "vite-tsconfig-paths": "^4.2.1",
+    "drizzle-kit": "^0.25.0",
+    "@types/bcrypt": "5.0.2",
+    "@types/jsonwebtoken": "9.0.7"
   },
   "engines": {
     "node": ">=20.0.0"

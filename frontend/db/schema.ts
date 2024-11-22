@@ -1,4 +1,4 @@
-import { pgTable, serial, text, unique, integer } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, integer } from "drizzle-orm/pg-core";
 import * as t from "drizzle-orm/pg-core";
 import { timestamps } from "./columns.helpers";
 
