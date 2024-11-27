@@ -1,6 +1,6 @@
 import { Form } from "@remix-run/react";
 import type { ActionFunctionArgs } from "@remix-run/node";
-import { createUser } from "db/repositories/user";
+import { createUser } from "../../db/repositories/user";
 export default function SignUp() {
   return (
     <>
@@ -45,11 +45,8 @@ export default function SignUp() {
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
-  // const name = formData.get("name");
-  // const password = formData.get("password");
   const name = String(formData.get("name"));
   const password = String(formData.get("password"));
-  // console.log(name, password);
   if (!name || !password) {
     return Response.json(
       { error: "Required fields are missing" },
@@ -59,7 +56,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   try {
     await createUser(name, password);
-    // Response.json({ message: "A new user has been added", status: 201 });
   } catch (error) {
     return Response.json({
       error: "server_error",
@@ -67,8 +63,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       status: 500,
     });
   }
-  // const hashedPassword = await Bun.password.hash("test1", "argon2d");
-  // return await db.insert(user).values({ userName: name, password: password });
+
   return Response.json({
     message: "Succesful",
   });
