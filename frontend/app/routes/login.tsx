@@ -1,18 +1,17 @@
 import { Form } from "@remix-run/react";
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { createUser } from "../../db/repositories/user";
-import { redirect } from "@remix-run/node";
-import { Link } from "@remix-run/react";
+// import { redirect } from "@remix-run/node";
 export default function SignUp() {
   return (
     <>
       <div className="h-full min-h-dvh bg-[#424037] flex flex-col items-center justify-center">
         <div className="w-3/4 h-96 bg-[#2C2E39] rounded-3xl flex flex-col items-center justify-center">
           <h2 className="text-center font-semibold text-lg text-[#FFFDF2] mb-2">
-            Sign up
+            Login
           </h2>
           <Form
-            action="/signup"
+            action="/login"
             method="post"
             className="flex flex-col items-center"
           >
@@ -32,14 +31,12 @@ export default function SignUp() {
               type="submit"
               className="text-[#FFFDF2] font-bold my-2 py-2 px-2 rounded border-lg border-solid border-cyan-600 w-full bg-cyan-600"
             >
-              Sign up
+              Login
             </button>
           </Form>
           <div className="w-3/4 flex gap-2">
             <p className="text-[#FFFDF2] font-light">Have an account?</p>
-            <button className="text-cyan-500 font-semibold">
-              <Link to={"/login"}>Log in</Link>
-            </button>
+            <button className="text-cyan-500 font-semibold">Log in</button>
           </div>
         </div>
       </div>
