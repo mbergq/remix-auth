@@ -1,11 +1,10 @@
-import { Form, json } from "@remix-run/react";
+import { Form } from "@remix-run/react";
 import type { ActionFunctionArgs } from "@remix-run/node";
-import { db } from "../../db/utils";
-import { user } from "../../db/schema";
+import { createUser } from "db/repositories/user";
 export default function SignUp() {
   return (
     <>
-      <div className="h-full min-h-dvh bg-[#FFFDF2] flex flex-col items-center justify-center">
+      <div className="h-full min-h-dvh bg-[#424037] flex flex-col items-center justify-center">
         <div className="w-3/4 h-96 bg-[#2C2E39] rounded-3xl flex flex-col items-center justify-center">
           <h2 className="text-center font-semibold text-lg text-[#FFFDF2] mb-2">
             Sign up
@@ -50,7 +49,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   // const password = formData.get("password");
   const name = String(formData.get("name"));
   const password = String(formData.get("password"));
-
+  // console.log(name, password);
   if (!name || !password) {
     return Response.json(
       { error: "Required fields are missing" },
@@ -59,15 +58,18 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   }
 
   try {
-    const hashedPassword = await Bun.password.hash("test1", "argon2d");
-    await db.insert(user).values({ userName: name, password: hashedPassword });
-    Response.json({ message: "A new user has been added", status: 201 });
+    await createUser(name, password);
+    // Response.json({ message: "A new user has been added", status: 201 });
   } catch (error) {
-    Response.json({
+    return Response.json({
       error: "server_error",
       message: "Unable to create user",
-      status: 400,
+      status: 500,
     });
   }
-  return Response.json({ ok: true });
+  // const hashedPassword = await Bun.password.hash("test1", "argon2d");
+  // return await db.insert(user).values({ userName: name, password: password });
+  return Response.json({
+    message: "Succesful",
+  });
 };
