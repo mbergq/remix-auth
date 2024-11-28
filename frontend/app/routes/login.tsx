@@ -1,4 +1,4 @@
-import { Form } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { createUser } from "../../db/repositories/user";
 // import { redirect } from "@remix-run/node";
@@ -35,8 +35,10 @@ export default function SignUp() {
             </button>
           </Form>
           <div className="w-3/4 flex gap-2">
-            <p className="text-[#FFFDF2] font-light">Have an account?</p>
-            <button className="text-cyan-500 font-semibold">Log in</button>
+            <p className="text-[#FFFDF2] font-light">Need an account?</p>
+            <Link to={"/signup"}>
+              <button className="text-cyan-500 font-semibold">Register</button>
+            </Link>
           </div>
         </div>
       </div>
