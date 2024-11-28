@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
+    "@node-rs/argon2": "^2.0.0",
     "@react-router/express": "^7.0.0",
     "@react-router/node": "^7.0.0",
     "@types/bun": "latest",

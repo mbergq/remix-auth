@@ -3,14 +3,16 @@ import { db } from "../utils";
 import { eq } from "drizzle-orm";
 import { user, token as tokenTable } from "../schema";
 import jwt from "jsonwebtoken";
+import { hash } from "@node-rs/argon2";
 
 dotenv.config({ path: "../../.env" });
 
 const createUser = async (name: string, password: string) => {
-  // const hashedPassword = await Bun.password.hash(password, "argon2d");
+  const hashedPassword = await hash(password);
+  console.log(hashedPassword);
   const insertUser = await db
     .insert(user)
-    .values({ userName: name, password: password })
+    .values({ userName: name, password: hashedPassword })
     .returning();
   return insertUser[0];
 };
@@ -27,8 +29,8 @@ const loginUser = async (name: string, password: string) => {
     }
     console.log(await Bun.password.verify(password, findUser[0].password));
     const matchPassword = await Bun.password.verify(
-      password,
-      findUser[0].password
+      findUser[0].password,
+      password
     );
     console.log("Pwdmatch:", matchPassword);
     if (!matchPassword) {
