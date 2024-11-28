@@ -5,7 +5,7 @@ import { user, token as tokenTable } from "../schema";
 import jwt from "jsonwebtoken";
 
 dotenv.config({ path: "../../.env" });
-console.log(process.env.ACCESS_TOKEN_SECRET);
+
 const createUser = async (name: string, password: string) => {
   // const hashedPassword = await Bun.password.hash(password, "argon2d");
   const insertUser = await db
@@ -21,13 +21,16 @@ const loginUser = async (name: string, password: string) => {
       .select()
       .from(user)
       .where(eq(user.userName, name));
+    // console.log(findUser);
     if (findUser.length === 0) {
       Response.json({ status: 401, error: "User not found" });
     }
+    console.log(await Bun.password.verify(password, findUser[0].password));
     const matchPassword = await Bun.password.verify(
       password,
       findUser[0].password
     );
+    console.log("Pwdmatch:", matchPassword);
     if (!matchPassword) {
       Response.json({ status: 401, error: "Password is not correct" });
     }
@@ -46,7 +49,7 @@ const loginUser = async (name: string, password: string) => {
       accessToken: accessToken,
       refreshToken: refreshToken,
     });
-    return Response.json({
+    Response.json({
       userId: findUser[0].id,
       accessToken: accessToken,
       refreshToken: refreshToken,

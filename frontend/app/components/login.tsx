@@ -1,7 +1,7 @@
 import { Form, Link, redirect } from "react-router";
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "react-router";
-import { createUser } from "../../db/repositories/user";
-import { getSession, commitSession } from "../sessions";
+import { loginUser } from "../../db/repositories/user";
+// import { getSession, commitSession } from "../sessions";
 
 // export const loader = async ({ request }: LoaderFunctionArgs) => {
 //   const session = await getSession(request.headers.get("Cookie"));
@@ -66,10 +66,27 @@ export default function SignUp() {
 }
 
 export const action = async ({ request }: ActionFunctionArgs) => {
-  const session = await getSession(request.headers.get("Cookie"));
+  // const session = await getSession(request.headers.get("Cookie"));
   const formData = await request.formData();
   const name = String(formData.get("name"));
   const password = String(formData.get("password"));
+
+  if (!name || !password) {
+    return Response.json(
+      { error: "Required fields are missing" },
+      { status: 400 }
+    );
+  }
+
+  try {
+    await loginUser(name, password);
+  } catch (error) {
+    return Response.json({
+      error: "server_error",
+      message: "Unable to login",
+      status: 500,
+    });
+  }
 
   return Response.json({
     message: "Succesful",
