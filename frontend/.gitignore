@@ -5,3 +5,4 @@ Icon
 /.cache
 /build
 .env
+.react-router/
