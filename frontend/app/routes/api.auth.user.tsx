@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs } from "@remix-run/node";
+import { LoaderFunctionArgs } from "react-router";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   return Response.json({

@@ -1,5 +1,5 @@
-import { Form, Link } from "@remix-run/react";
-import type { ActionFunctionArgs } from "@remix-run/node";
+import { Form, Link } from "react-router";
+import type { ActionFunctionArgs } from "react-router";
 import { createUser } from "../../db/repositories/user";
 // import { redirect } from "@remix-run/node";
 export default function SignUp() {

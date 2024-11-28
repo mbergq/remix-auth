@@ -1,8 +1,8 @@
 import type {
-  ActionFunctionArgs,
-  // LoaderFunctionArgs,
-} from "@remix-run/node"; // or cloudflare/deno
-import { Form } from "@remix-run/react";
+// LoaderFunctionArgs,
+ActionFunctionArgs
+} from "react-router"; // or cloudflare/deno
+import { Form } from "react-router";
 
 // import { useLoaderData, Form } from "@remix-run/react";
 
