@@ -3,21 +3,21 @@ import type { ActionFunctionArgs, LoaderFunctionArgs } from "react-router";
 import { createUser } from "../../db/repositories/user";
 import { getSession, commitSession } from "../sessions";
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const session = await getSession(request.headers.get("Cookie"));
+// export const loader = async ({ request }: LoaderFunctionArgs) => {
+//   const session = await getSession(request.headers.get("Cookie"));
 
-  if (session.has("userId")) {
-    return redirect("/");
-  }
+//   if (session.has("userId")) {
+//     return redirect("/");
+//   }
 
-  const data = { error: session.get("error") };
+//   const data = { error: session.get("error") };
 
-  return Response.json(data, {
-    headers: {
-      "Set-cookie": await commitSession(session),
-    },
-  });
-};
+//   return Response.json(data, {
+//     headers: {
+//       "Set-cookie": await commitSession(session),
+//     },
+//   });
+// };
 
 export default function SignUp() {
   return (
@@ -52,7 +52,9 @@ export default function SignUp() {
             </button>
           </Form>
           <div className="w-3/4 flex gap-2">
-            <p className="text-[#FFFDF2] font-light">Need an account?</p>
+            <p className="text-[#FFFDF2] font-light">
+              Don&apos;t have an account?
+            </p>
             <Link to={"/signup"}>
               <button className="text-cyan-500 font-semibold">Register</button>
             </Link>

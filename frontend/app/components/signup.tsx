@@ -33,8 +33,10 @@ export default function SignUp() {
               Sign up
             </button>
           </Form>
-          <div className="w-3/4 flex gap-2">
-            <p className="text-[#FFFDF2] font-light">Have an account?</p>
+          <div className="flex">
+            <p className="text-[#FFFDF2] font-light">
+              Already have an account?
+            </p>
             <button className="text-cyan-500 font-semibold">
               <Link to={"/login"}>Log in</Link>
             </button>
