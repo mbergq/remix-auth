@@ -1,4 +1,4 @@
-import { Form, Link } from "react-router";
+import { Form, Link, redirect } from "react-router";
 import type { ActionFunctionArgs } from "react-router";
 import { createUser } from "../../db/repositories/user";
 export default function SignUp() {
@@ -66,8 +66,5 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     });
   }
 
-  return Response.json({
-    message: "Succesful",
-  });
-  // return redirect("/account");
+  return redirect("/login");
 };

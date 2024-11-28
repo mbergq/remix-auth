@@ -1,18 +1,18 @@
-import { pgTable, serial, text, integer } from "drizzle-orm/pg-core";
-import * as t from "drizzle-orm/pg-core";
+import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 import { timestamps } from "./columns.helpers";
 
 export const user = pgTable("user", {
-  id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
+  id: uuid().defaultRandom().primaryKey(),
   userName: text("name").notNull(),
   password: text("password").notNull(),
   ...timestamps,
 });
 
-export const refreshToken = pgTable("refresh_token", {
-  id: serial("id").primaryKey(),
+export const token = pgTable("token", {
+  id: uuid().defaultRandom().primaryKey(),
+  accessToken: text("access_token").notNull(),
   refreshToken: text("refresh_token").notNull(),
-  userId: integer("user_id")
+  userId: uuid("user_id")
     .notNull()
     .references(() => user.id),
 });
