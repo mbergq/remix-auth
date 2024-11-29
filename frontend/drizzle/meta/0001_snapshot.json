@@ -1,6 +1,6 @@
 {
-  "id": "c355bb1b-bf2f-46d2-baed-5cc5acc76295",
-  "prevId": "5299d7e3-db24-49b9-ae1b-2ecdd1e30ff7",
+  "id": "01791007-2341-4d8b-9bf9-563dceb8c058",
+  "prevId": "651c1645-5348-4bdd-9c22-c322c738fe2b",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -11,8 +11,9 @@
         "id": {
           "name": "id",
           "type": "uuid",
-          "primaryKey": false,
-          "notNull": true
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "access_token": {
           "name": "access_token",
@@ -25,16 +26,22 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "token_id_user_id_fk": {
-          "name": "token_id_user_id_fk",
+        "token_user_id_app_user_id_fk": {
+          "name": "token_user_id_app_user_id_fk",
           "tableFrom": "token",
-          "tableTo": "user",
+          "tableTo": "app_user",
           "columnsFrom": [
-            "id"
+            "user_id"
           ],
           "columnsTo": [
             "id"
@@ -46,8 +53,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "public.user": {
-      "name": "user",
+    "public.app_user": {
+      "name": "app_user",
       "schema": "",
       "columns": {
         "id": {

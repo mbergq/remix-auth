@@ -1,5 +1,5 @@
 {
-  "id": "5299d7e3-db24-49b9-ae1b-2ecdd1e30ff7",
+  "id": "651c1645-5348-4bdd-9c22-c322c738fe2b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -29,10 +29,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "token_id_user_id_fk": {
-          "name": "token_id_user_id_fk",
+        "token_id_app_user_id_fk": {
+          "name": "token_id_app_user_id_fk",
           "tableFrom": "token",
-          "tableTo": "user",
+          "tableTo": "app_user",
           "columnsFrom": [
             "id"
           ],
@@ -46,8 +46,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "public.user": {
-      "name": "user",
+    "public.app_user": {
+      "name": "app_user",
       "schema": "",
       "columns": {
         "id": {
@@ -76,8 +76,8 @@
           "notNull": true,
           "default": "now()"
         },
-        "updated_at": {
-          "name": "updated_at",
+        "modified_at": {
+          "name": "modified_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false
