@@ -12,7 +12,7 @@ export const token = pgTable("token", {
   id: uuid().defaultRandom().primaryKey(),
   accessToken: text("access_token").notNull(),
   refreshToken: text("refresh_token").notNull(),
-  userId: uuid("user_id")
+  userId: uuid("id")
     .notNull()
     .references(() => user.id),
 });

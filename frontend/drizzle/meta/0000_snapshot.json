@@ -1,5 +1,5 @@
 {
-  "id": "37a7cbbc-6584-422f-af2b-9676a73e9fc8",
+  "id": "5299d7e3-db24-49b9-ae1b-2ecdd1e30ff7",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -11,9 +11,8 @@
         "id": {
           "name": "id",
           "type": "uuid",
-          "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
+          "primaryKey": false,
+          "notNull": true
         },
         "access_token": {
           "name": "access_token",
@@ -26,22 +25,16 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
-        },
-        "user_id": {
-          "name": "user_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "token_user_id_user_id_fk": {
-          "name": "token_user_id_user_id_fk",
+        "token_id_user_id_fk": {
+          "name": "token_id_user_id_fk",
           "tableFrom": "token",
           "tableTo": "user",
           "columnsFrom": [
-            "user_id"
+            "id"
           ],
           "columnsTo": [
             "id"
